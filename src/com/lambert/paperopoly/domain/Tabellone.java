@@ -29,6 +29,9 @@ public class Tabellone {
          Casella casella = null;
          this.caselle.add(casella);
       }*/
+
+      // Qui bisognerebbe usare una Factory CasellaFactory (Pattern Factory) supportata dal file caselle.properties (Pattern Protected variations).
+
       this.caselle.add(new CasellaDelVia("Casella del Via", 0));
       this.caselle.add(new CasellaSostaLibera("Casella Sosta Libera", 1));
       this.caselle.add(new CasellaConIPersonaggi("Casella con i Personaggi", 2));

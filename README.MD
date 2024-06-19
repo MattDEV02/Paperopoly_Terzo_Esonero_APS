@@ -18,6 +18,7 @@ software Paperopoly per eseguire una partita del gioco Paperopoly come una simul
 - Strategy.
 - Singleton.
 - Facade.
+- Protected variations.
 
 ## Analisi OOP:
 
