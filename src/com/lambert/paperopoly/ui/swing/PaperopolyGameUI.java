@@ -9,9 +9,10 @@ import java.awt.*;
 public class PaperopolyGameUI {
 
    private PartitaAPaperopoly partitaAPaperopoly;
+   private static final String APP_NAME = "PaperopolyGame";
 
    public PaperopolyGameUI() {
-      JFrame frame = new JFrame("PaperopolyGame");
+      JFrame frame = new JFrame(PaperopolyGameUI.APP_NAME);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setSize(300, 200);
 
@@ -23,7 +24,7 @@ public class PaperopolyGameUI {
       panel.setBackground(lightBackground); // Impostiamo il colore di sfondo chiaro
 
       // Etichetta titolo centrata in alto
-      JLabel titleLabel = new JLabel("PaperopolyGame", JLabel.CENTER);
+      JLabel titleLabel = new JLabel(PaperopolyGameUI.APP_NAME, JLabel.CENTER);
       titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
       GridBagConstraints gbc = new GridBagConstraints();
       gbc.gridx = 0;
@@ -41,7 +42,7 @@ public class PaperopolyGameUI {
       gbc.insets = new Insets(4, 10, 5, 10); // Margine inferiore per i campi input
 
       // Etichetta e campo input per "# giri"
-      JLabel giriLabel = new JLabel("  # giri:");
+      JLabel giriLabel = new JLabel("   # giri:");
       JTextField giriField = new JTextField(8);
       gbc.gridx = -1;
       gbc.gridy = 0;
@@ -50,7 +51,7 @@ public class PaperopolyGameUI {
       inputPanel.add(giriField, gbc);
 
       // Etichetta e campo input per "# giocatori"
-      JLabel giocatoriLabel = new JLabel("  # Giocatori:");
+      JLabel giocatoriLabel = new JLabel("   # Giocatori:");
       JTextField giocatoriField = new JTextField(8);
       gbc.gridx = 0;
       gbc.gridy = 1; // Modifica la riga per il secondo campo
@@ -78,8 +79,9 @@ public class PaperopolyGameUI {
          try {
             Integer numeroGiri = Integer.parseInt(giriField.getText());
             Integer numeroGiocatori = Integer.parseInt(giocatoriField.getText());
-            this.partitaAPaperopoly = new PartitaAPaperopoly(numeroGiri, numeroGiocatori);
+            this.partitaAPaperopoly = PartitaAPaperopoly.getInstance(numeroGiri, numeroGiocatori);
             this.partitaAPaperopoly.giocaPartita();
+            frame.dispose();
          } catch (NumberFormatException numberFormatException) {
             System.err.println(numberFormatException.getMessage());
          }

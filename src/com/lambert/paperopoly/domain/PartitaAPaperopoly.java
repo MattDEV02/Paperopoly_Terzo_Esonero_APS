@@ -7,31 +7,26 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PartitaAPaperopoly {
-
    private static final List<String> NOMI_GIOCATORI = new ArrayList<String>(Arrays.asList("Alice", "Bob", "Carl", "David", "Eva", "Frank", "Grace", "Igor"));
    private Integer numeroGiri;
-   private Integer numeroGiocatori;
    private List<Giocatore> giocatori;
    private Tabellone tabellone;
    private Bussolotto bussolotto;
+   private static volatile PartitaAPaperopoly INSTANCE;
 
-   public Integer getNumeroGiri() {
-      return this.numeroGiri;
+   public static PartitaAPaperopoly getInstance(Integer numeroGiri, Integer numeroGiocatori) {
+      if (PartitaAPaperopoly.INSTANCE == null) {
+         // Sincronizzazione per garantire la sicurezza del thread
+         synchronized (PartitaAPaperopoly.class) {
+            if (PartitaAPaperopoly.INSTANCE == null) {
+               PartitaAPaperopoly.INSTANCE = new PartitaAPaperopoly(numeroGiri, numeroGiocatori);
+            }
+         }
+      }
+      return PartitaAPaperopoly.INSTANCE;
    }
 
-   public void setNumeroGiri(Integer numeroGiri) {
-      this.numeroGiri = numeroGiri;
-   }
-
-   public Integer getNumeroGiocatori() {
-      return this.numeroGiocatori;
-   }
-
-   public void setNumeroGiocatori(Integer numeroGiocatori) {
-      this.numeroGiocatori = numeroGiocatori;
-   }
-
-   public PartitaAPaperopoly(Integer numeroGiri, Integer numeroGiocatori) {
+   private PartitaAPaperopoly(Integer numeroGiri, Integer numeroGiocatori) {
       this.bussolotto = new Bussolotto();
       this.tabellone = new Tabellone(this.bussolotto);
       if(numeroGiocatori > PartitaAPaperopoly.NOMI_GIOCATORI.size()) {
@@ -42,11 +37,19 @@ public class PartitaAPaperopoly {
          giocatori.add(new Giocatore(PartitaAPaperopoly.NOMI_GIOCATORI.get(i), this.tabellone, this.tabellone.getPrimaCasella(), this.bussolotto));
       }
       this.numeroGiri = numeroGiri;
-      this.numeroGiocatori = numeroGiocatori;
+   }
+
+
+   public Integer getNumeroGiri() {
+      return this.numeroGiri;
+   }
+
+   public void setNumeroGiri(Integer numeroGiri) {
+      this.numeroGiri = numeroGiri;
    }
 
    public void giocaPartita() {
-      System.out.println("Inizio della simulazione per " + this.numeroGiri.toString() + " giri e " + this.numeroGiocatori + " numero Giocatori:");
+      System.out.println("Inizio della simulazione per " + this.numeroGiri.toString() + " giri e " + this.giocatori.size() + " numero Giocatori:");
       for(Integer giro = 0; giro < this.numeroGiri; giro++) {
          this.giocaTurno(giro);
       }
@@ -65,7 +68,6 @@ public class PartitaAPaperopoly {
       return "PartitaAPaperopoly: {" +
               " bussolotto = " + this.bussolotto.toString() +
               ", numeroGiri = " + this.numeroGiri.toString() +
-              ", numeroGiocatori = " + this.numeroGiocatori.toString() +
               ", giocatori = " + this.giocatori.toString() +
               ", tabellone = " + this.tabellone.toString() +
               " }";

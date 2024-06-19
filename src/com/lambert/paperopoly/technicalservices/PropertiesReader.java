@@ -11,10 +11,7 @@ public class PropertiesReader {
       try (InputStream propertiesInputStream = PropertiesReader.class.getClassLoader().getResourceAsStream("/src/resources/application.properties")){
          if(propertiesInputStream != null) {
             Properties properties = new Properties();
-            // Carica le proprietà dal file di input
             properties.load(propertiesInputStream);
-
-            // Legge le proprietà
             String propertyValue = properties.getProperty(propertyKey);
             propertiesInputStream.close();
             return propertyValue;
