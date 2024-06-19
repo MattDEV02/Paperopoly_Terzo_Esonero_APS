@@ -9,7 +9,7 @@ import java.awt.*;
 public class PaperopolyGameUI {
 
    private PartitaAPaperopoly partitaAPaperopoly;
-   private static final String APP_NAME = "PaperopolyGame";
+   private static final String APP_NAME = "PaperopolyGame"; // app.name di application.properties
 
    public PaperopolyGameUI() {
       JFrame frame = new JFrame(PaperopolyGameUI.APP_NAME);

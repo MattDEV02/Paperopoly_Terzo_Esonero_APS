@@ -19,6 +19,15 @@ software Paperopoly per eseguire una partita del gioco Paperopoly come una simul
 - Singleton.
 - Facade.
 - Protected variations.
+- Factory (da utilizzare).
+
+## Altri principi e buone pratiche utilizzate:
+
+- Principio di separazione Modello-Vista.
+- Modularità per codice di qualità e riutilizzabile.
+- Unit testing (da utilizzare).
+- Utilizzo di eccezioni (da utilizzare).
+- Versioning del codice.
 
 ## Analisi OOP:
 

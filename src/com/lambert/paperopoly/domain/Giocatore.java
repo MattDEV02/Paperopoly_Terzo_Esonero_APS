@@ -93,7 +93,7 @@ public class Giocatore {
 
    @Override
    public int hashCode() {
-      return Objects.hashCode(nome);
+      return Objects.hashCode(this.nome);
    }
 
    public void effettuaTurno() {
